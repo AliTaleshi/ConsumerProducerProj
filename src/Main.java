@@ -7,7 +7,7 @@ public class Main {
         MessageBroker broker = new MessageBroker();
 
         for (int i = 0; i < 3; i++) {
-            Thread consumerThread = new Thread(new Consumer(broker, "Consumer-" + i));
+            Thread consumerThread = new Thread(new Consumer(broker, 10, "Consumer-" + i));
             consumerThread.start();
         }
 

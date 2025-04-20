@@ -1,17 +1,15 @@
 package consumer;
 
-import broker.MessageBroker;
+import datastructure.CustomBlockingQueue;
 import message.Message;
-
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import broker.MessageBroker;
 
 public class Consumer implements Runnable {
-    private final BlockingQueue<Message> queue;
+    private final CustomBlockingQueue queue;
     private final String name;
 
-    public Consumer(MessageBroker<Message> broker, String name) {
-        this.queue = new LinkedBlockingQueue<>();
+    public Consumer(MessageBroker broker, int queueSize, String name) {
+        this.queue = new CustomBlockingQueue(queueSize);
         this.name = name;
         broker.registerConsumerQueue(queue);
     }
@@ -20,8 +18,9 @@ public class Consumer implements Runnable {
     public void run() {
         try {
             while (true) {
+                Thread.sleep(1000);
                 Message msg = queue.take();
-                System.out.println("[" + name + "] received: " + msg.getContent());
+                System.out.println(name + " received: " + msg.getContent());
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

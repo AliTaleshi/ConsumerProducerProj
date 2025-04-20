@@ -1,14 +1,14 @@
 package producer;
 
 import broker.MessageBroker;
-import message.Message;
 import message.TextMessage;
+import message.Message;
 
 public class Producer implements Runnable {
-    private final MessageBroker<Message> broker;
+    private final MessageBroker broker;
     private final String name;
 
-    public Producer(MessageBroker<Message> broker, String name) {
+    public Producer(MessageBroker broker, String name) {
         this.broker = broker;
         this.name = name;
     }
@@ -17,13 +17,13 @@ public class Producer implements Runnable {
     public void run() {
         int count = 0;
         while (true) {
-            Message msg = new TextMessage("[" + name + "]" + " message #" + count++);
+            Message msg = new TextMessage(name + " message #" + count++);
             broker.publish(msg);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                break;
-            }
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                break;
+//            }
         }
     }
 }
