@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class MessageBroker {
-    private final List<BlockingQueue<Message>> consumerQueues = new CopyOnWriteArrayList<>();
+public class MessageBroker<T extends Message> {
+    private final List<BlockingQueue<T>> consumerQueues = new CopyOnWriteArrayList<>();
 
-    public void registerConsumerQueue(BlockingQueue<Message> queue) {
+    public void registerConsumerQueue(BlockingQueue<T> queue) {
         consumerQueues.add(queue);
     }
 
-    public void publish(Message message) {
-        for (BlockingQueue<Message> queue : consumerQueues) {
+    public void publish(T message) {
+        for (BlockingQueue<T> queue : consumerQueues) {
             try {
                 queue.put(message);
             } catch (InterruptedException e) {

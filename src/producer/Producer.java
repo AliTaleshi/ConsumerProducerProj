@@ -5,10 +5,10 @@ import message.Message;
 import message.TextMessage;
 
 public class Producer implements Runnable {
-    private final MessageBroker broker;
+    private final MessageBroker<Message> broker;
     private final String name;
 
-    public Producer(MessageBroker broker, String name) {
+    public Producer(MessageBroker<Message> broker, String name) {
         this.broker = broker;
         this.name = name;
     }

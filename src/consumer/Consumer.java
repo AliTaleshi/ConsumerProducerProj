@@ -10,7 +10,7 @@ public class Consumer implements Runnable {
     private final BlockingQueue<Message> queue;
     private final String name;
 
-    public Consumer(MessageBroker broker, String name) {
+    public Consumer(MessageBroker<Message> broker, String name) {
         this.queue = new LinkedBlockingQueue<>();
         this.name = name;
         broker.registerConsumerQueue(queue);
