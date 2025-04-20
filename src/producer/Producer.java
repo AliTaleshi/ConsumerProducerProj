@@ -17,10 +17,10 @@ public class Producer implements Runnable {
     public void run() {
         int count = 0;
         while (true) {
-            Message msg = new TextMessage(name + " message #" + count++);
+            Message msg = new TextMessage("[" + name + "]" + " message #" + count++);
             broker.publish(msg);
             try {
-                Thread.sleep(1000); // Simulate delay
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 break;
             }

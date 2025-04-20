@@ -8,9 +8,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class Consumer implements Runnable {
     private final BlockingQueue<Message> queue;
+    private final String name;
 
-    public Consumer(MessageBroker broker) {
+    public Consumer(MessageBroker broker, String name) {
         this.queue = new LinkedBlockingQueue<>();
+        this.name = name;
         broker.registerConsumerQueue(queue);
     }
 
@@ -19,7 +21,7 @@ public class Consumer implements Runnable {
         try {
             while (true) {
                 Message msg = queue.take();
-                System.out.println("Consumer [" + Thread.currentThread().getName() + "] received: " + msg.getContent());
+                System.out.println("[" + name + "] received: " + msg.getContent());
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
