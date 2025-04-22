@@ -1,6 +1,10 @@
 import broker.MessageBroker;
 import consumer.Consumer;
+import message.Message;
 import producer.Producer;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,5 +19,7 @@ public class Main {
             Thread producerThread = new Thread(new Producer(broker, "Producer-" + i));
             producerThread.start();
         }
+
+        BlockingQueue<Message> queue = new ArrayBlockingQueue<Message>(10);
     }
 }

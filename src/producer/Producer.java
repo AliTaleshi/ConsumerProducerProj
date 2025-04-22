@@ -17,8 +17,8 @@ public class Producer implements Runnable {
     public void run() {
         int count = 0;
         while (true) {
-            Message msg = new TextMessage(name + " message #" + count++);
-            broker.publish(msg);
+            Message message = new TextMessage(name + " message #" + count++);
+            broker.publish(message);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
