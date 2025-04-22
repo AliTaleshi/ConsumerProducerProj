@@ -15,9 +15,7 @@ public class MessageBroker {
     }
 
     public void publish(Message message) {
-        if (message == null) {
-            throw new IllegalArgumentException("Null message not allowed");
-        }
+        if (message == null) throw new IllegalArgumentException("Null message not allowed");
 
         for (int i = 0; i < consumerCount; i++) {
             try {
