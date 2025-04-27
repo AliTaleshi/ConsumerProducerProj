@@ -18,7 +18,7 @@ public class Consumer implements Runnable {
     public void run() {
         try {
             while (true) {
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 Message message = queue.take();
                 System.out.println(name + " received: " + message.getContent());
             }
